@@ -1,0 +1,27 @@
+# Template file for 'dwmblocks-async'
+pkgname=dwmblocks-async
+version=469e684
+revision=1
+build_style=gnu-makefile
+hostmakedepends="pkg-config git"
+makedepends="xcb-util-devel"
+depends=""
+short_desc="Efficient, lean, and asynchronous status feed generator for dwm"
+maintainer="João Victor Gomes Izidoro <joaovictor.gizidoro@gmail.com>"
+license="GPL-2.0"
+homepage="https://github.com/UtkarshVerma/dwmblocks-async"
+distfiles=""
+
+do_fetch() {
+	git clone https://github.com/UtkarshVerma/dwmblocks-async.git "$wrksrc"
+}
+
+do_build() {
+	[ -e ${FILESDIR}/config.h ] && cp ${FILESDIR}/config.h config.h
+	make CC=$CC
+}
+
+do_install() {
+	make PREFIX=/usr DESTDIR=$DESTDIR install
+	vlicense LICENSE
+}
