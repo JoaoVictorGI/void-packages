@@ -1,0 +1,41 @@
+# Template file for 'intellij-idea'
+pkgname=intellij-idea
+version=2026.1.1
+revision=1
+archs="x86_64"
+depends="virtual?java-environment giflib libXtst hicolor-icon-theme"
+short_desc="Java integrated development environment by JetBrains"
+maintainer="Piekay <github@piekay.de>"
+license="custom:Commercial"
+homepage="https://www.jetbrains.org/"
+distfiles="https://download.jetbrains.com/idea/idea-${version}.tar.gz"
+checksum=7a58d386f2a2e5a8cd7e4591657b4fe599aeac22d960c7accf5f927846507bfb
+repository=nonfree
+restricted=yes
+nopie=yes
+python_version=3
+skiprdeps="/usr/lib/intellij-idea/plugins/Kotlin/bin/linux/LLDBFrontend"
+
+do_install() {
+	vmkdir usr/bin
+	vmkdir usr/share/doc/intellij-idea
+	vmkdir usr/lib/intellij-idea
+	vmkdir usr/share/pixmaps
+	vmkdir usr/share/icons/hicolor/scalable/apps
+
+	vcopy bin usr/lib/intellij-idea
+	vcopy lib usr/lib/intellij-idea
+	vcopy plugins usr/lib/intellij-idea
+	vcopy product-info.json usr/lib/intellij-idea
+	vcopy build.txt usr/lib/intellij-idea
+	vcopy jbr usr/lib/intellij-idea
+	vcopy license usr/share/doc/intellij-idea
+	rm ${DESTDIR}/usr/lib/intellij-idea/lib/async-profiler -rf
+	ln -sf ../lib/intellij-idea/bin/idea ${DESTDIR}/usr/bin/idea
+	ln -sf ../../lib/intellij-idea/bin/idea.png ${DESTDIR}/usr/share/pixmaps/idea.png
+	ln -sf ../../lib/intellij-idea/bin/idea.svg ${DESTDIR}/usr/share/icons/hicolor/scalable/apps/idea.svg
+	vinstall ${FILESDIR}/idea.desktop 644 usr/share/applications idea.desktop
+}
+post_install() {
+	vlicense ${FILESDIR}/EULA
+}
