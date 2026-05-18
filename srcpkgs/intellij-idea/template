@@ -1,6 +1,6 @@
 # Template file for 'intellij-idea'
 pkgname=intellij-idea
-version=2026.1.1
+version=2026.1.2
 revision=1
 archs="x86_64"
 depends="virtual?java-environment giflib libXtst hicolor-icon-theme"
@@ -9,7 +9,7 @@ maintainer="Piekay <github@piekay.de>"
 license="custom:Commercial"
 homepage="https://www.jetbrains.org/"
 distfiles="https://download.jetbrains.com/idea/idea-${version}.tar.gz"
-checksum=7a58d386f2a2e5a8cd7e4591657b4fe599aeac22d960c7accf5f927846507bfb
+checksum=e820175d1a7d0ee2492e7b38f6b7f046a132bfe4b082086d9b035edb03c777b1
 repository=nonfree
 restricted=yes
 nopie=yes
